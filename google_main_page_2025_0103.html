@@ -8,22 +8,96 @@
   </head>
   <body>
     <div class="GooglePage">
+      <!-- 헤더 부분 -->
       <div class="header">
         <div class="header-left"></div>
         <div class="header-right">
-          <div class="name">Gmail</div>
-          <div class="name">이미지</div>
-          <div class="icon tooltip">
+          <div class="name modal-btn">Gmail</div>
+          <div class="name modal-btn">이미지</div>
+          <div class="icon tooltip modal-btn">
             <img src=images/searchlab.png />
             <span class="tooltiptext">Search Labs</span>
           </div>
-          <div class="icon tooltip">
+          <div class="icon tooltip" id="app-dropdown">
             <img src=images/app.png />
+            <div class="app-box" style="display: none">
+              <!-- 여기에 앱 아이콘들을 추가 -->
+              <div class="apps modal-btn">
+                <img src="images/app-box/login.png" alt="App 1" />
+                <div>계정</div>
+              </div>
+              <div class="apps modal-btn">
+                <img src="images/app-box/research.png" alt="App 2" />
+                <div>검색</div>
+              </div>
+              <div class="apps modal-btn">
+                <img src="images/app-box/map.png" alt="App 3" />
+                <div>지도</div>
+              </div>
+              <div class="apps modal-btn">
+                <img src="images/app-box/youtube.png" alt="App 4" />
+                <div>YouTube</div>
+              </div>
+              <div class="apps modal-btn">
+                <img src="images/app-box/news.png" alt="App 5" />
+                <div>뉴스</div>
+              </div>
+              <div class="apps modal-btn">
+                <img src="images/app-box/gmail.png" alt="App 6" />
+                <div>Gmail</div>
+              </div>
+              <div class="apps modal-btn">
+                <img src="images/app-box/meet.png" alt="App 7" />
+                <div>Meet</div>
+              </div>
+              <div class="apps modal-btn">
+                <img src="images/app-box/chat.png" alt="App 8" />
+                <div>채팅</div>
+              </div>
+              <div class="apps modal-btn">
+                <img src="images/app-box/address.png" alt="App 9" />
+                <div>주소록</div>
+              </div>
+              <div class="apps modal-btn">
+                <img src="images/app-box/drive.png" alt="App 10" />
+                <div>드라이브</div>
+              </div>
+              <div class="apps modal-btn">
+                <img src="images/app-box/calandar.png" alt="App 11" />
+                <div>Calendar</div>
+              </div>
+              <div class="apps modal-btn">
+                <img src="images/app-box/play.png" alt="App 12" />
+                <div>Play</div>
+              </div>
+              <div class="apps modal-btn">
+                <img src="images/app-box/translate.png" alt="App 13" />
+                <div>번역</div>
+              </div>
+              <div class="apps modal-btn">
+                <img src="images/app-box/picture.png" alt="App 14" />
+                <div>사진</div>
+              </div>
+              <div class="apps modal-btn">
+                <img src="images/app-box/shopping.png" alt="App 15" />
+                <div>쇼핑</div>
+              </div>
+            </div>
+            <!-- 모달 창 표시 -->
+            <div id="myModal" class="modal">
+              <div class="modal-content">
+                <img src="images/warning.png" alt="알림" />
+                <p>준비 중입니다...</p>
+                <div class="close">닫기</div>
+              </div>
+            </div>
             <span class="tooltiptext">Google 앱</span>
           </div>
-          <div class="login">소현</div>
+          <!-- <div class="login">소현</div> -->
         </div>
       </div>
+
+      <!-- 중앙 메인 부분 -->
       <div class="main">
         <div id="Logo">
           <img src="images/google_logo.svg" />
@@ -31,8 +105,8 @@
         <div class="research-box">
           <input type="text" placeholder="Google 검색 또는 URL 입력" />
           <div class="icon icon1"><img src=images/search.png /></div>
-          <div class="icon icon2"><img src=images/mic.png /></div>
-          <div class="icon icon3"><img src=images/capture.png /></div>
+          <div class="icon icon2 modal-btn"><img src=images/mic.png /></div>
+          <div class="icon icon3 modal-btn"><img src=images/capture.png /></div>
         </div>
         <div class="container direct-site">
           <div class="till" title="NAVER" data-url="https://www.naver.com">
@@ -56,7 +130,7 @@
             <img class="more" src="images/icon_more.svg" />
             <div class="title">YOUTUBE</div>
           </div>
-          <div class="till" title="바로가기 추가" data-url="#">
+          <div class="till modal-btn" title="바로가기 추가" data-url="#">
             <div class="icon-box2">
               <div>+</div>
             </div>
@@ -64,6 +138,8 @@
           </div>
         </div>
       </div>
+
+      <!-- 푸터 부분 -->
       <div class="footer">
         <div class="icon">
           <img src="/images/edit.png" />
@@ -90,6 +166,74 @@
           }
         });
       });
+    });
+  </script>
+  <script>
+    // app-dropdown 실행 시
+    function toggleAppBox() {
+      const appDropdown = document.getElementById("app-dropdown");
+      const tooltiptext = appDropdown.querySelector(".tooltiptext");
+      const appBox = appDropdown.querySelector(".app-box");
+
+      if (appBox.style.display === "none" || appBox.style.display === "") {
+        tooltiptext.style.display = "none";
+        appBox.style.display = "block";
+      } else {
+        tooltiptext.style.display = "inline";
+        appBox.style.display = "none";
+      }
+    }
+
+    document
+      .getElementById("app-dropdown")
+      .addEventListener("click", function (event) {
+        toggleAppBox();
+        event.stopPropagation();
+      });
+
+    document.addEventListener("click", function (event) {
+      const appDropdown = document.getElementById("app-dropdown");
+      const appBox = appDropdown.querySelector(".app-box");
+
+      if (
+        !appDropdown.contains(event.target) &&
+        appBox.style.display === "block"
+      ) {
+        appBox.style.display = "none";
+        appDropdown.querySelector(".tooltiptext").style.display = "inline";
+      }
+    });
+  </script>
+  <script>
+    // modal 작동
+    document.addEventListener("DOMContentLoaded", function () {
+      var modal = document.getElementById("myModal");
+      var modalbtn = document.getElementsByClassName("modal-btn");
+      var closeBtn = document.getElementsByClassName("close")[0];
+      var appDropdown = document.getElementById("app-dropdown");
+      var tooltiptext = appDropdown.querySelector(".tooltiptext");
+
+      for (var i = 0; i < modalbtn.length; i++) {
+        modalbtn[i].onclick = function () {
+          modal.style.display = "block";
+          tooltiptext.style.visibility = "hidden";
+        };
+      }
+
+      closeBtn.onclick = function (event) {
+        modal.style.display = "none";
+        event.stopPropagation();
+      };
+
+      modal.onclick = function (event) {
+        event.stopPropagation();
+      };
+
+      window.onclick = function (event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      };
     });
   </script>
 </html>
